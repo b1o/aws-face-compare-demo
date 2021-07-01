@@ -33,7 +33,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/aws-sdk.min.js"
+            ]
           },
           "configurations": {
             "production": {
