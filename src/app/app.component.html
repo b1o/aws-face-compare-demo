@@ -1,18 +1,13 @@
-<div
-  style="
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  "
->
+<div class="wrapper">
   <div style="position: relative">
     <webcam
+      [width]="720"
+      [height]="480"
       [allowCameraSwitch]="false"
       [trigger]="triggerObservable"
       (imageCapture)="onFileChange($event)"
     ></webcam>
-    <div
+    <!-- <div
       *ngIf="loading"
       class="loading"
       style="
@@ -29,33 +24,48 @@
       "
     >
       Comparing...
-    </div>
+    </div> -->
+
+    <button *ngIf="images.length < 2" class="snap-button" (click)="capture()">
+      <span class="material-icons"> photo_camera </span>
+    </button>
+  </div>
+  <div class="photos">
+    <img
+      style="width: 45%"
+      *ngFor="let image of images"
+      [src]="image.imageAsDataUrl"
+    />
+  </div>
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      position: relative;
+      align-items: center;
+      width: 700px;
+      margin-top: 10px;
+    "
+  >
     <button
-      *ngIf="images.length < 2"
-      style="position: absolute; top: 0; right: 0; margin: 5px"
-      (click)="capture()"
+      class="compare-button"
+      *ngIf="images.length > 1"
+      (click)="compareFaces()"
     >
-      Snap Photo
+      Сравни
+    </button>
+    <button
+      class="refresh"
+      *ngIf="images.length"
+      (click)="images = []; result = null"
+    >
+      <span class="material-icons"> refresh </span>
     </button>
   </div>
 </div>
 
-<div style="display: flex; flex-wrap: wrap">
-  <img width="25%" *ngFor="let image of images" [src]="image.imageAsDataUrl" />
-</div>
-
 <div *ngIf="result">Similarity: {{ result.FaceMatches[0].Similarity }}</div>
 
-<div
-  style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-  "
->
-  <button *ngIf="images.length > 1" (click)="compareFaces()">Compare</button>
-  <button *ngIf="images.length" (click)="images = []; result = null">
-    Reset
-  </button>
+<div class="overlay" *ngIf="showOverlay" (click)="showOverlay = false">
+  <div class="success">Изображенията съвпадат</div>
 </div>

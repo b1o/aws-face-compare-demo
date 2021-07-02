@@ -18,6 +18,7 @@ export class AppComponent {
   public images: WebcamImage[] = [];
   public loading = false;
   public result: any = null;
+  public showOverlay = false;
 
   constructor() {
     const region = 'us-east-1'; // Region
@@ -36,7 +37,7 @@ export class AppComponent {
   }
 
   onFileChange(event: WebcamImage) {
-    if(this.images.length == 2) return;
+    if (this.images.length == 2) return;
     console.log(event);
     this.images.push(event);
   }
@@ -79,6 +80,9 @@ export class AppComponent {
       } else {
         console.log(response);
         this.result = response;
+        if (response.FaceMatches[0].Similarity > 70) {
+          this.showOverlay = true;
+        }
       }
       this.loading = false;
     });

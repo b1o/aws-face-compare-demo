@@ -1,0 +1,81 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.photos {
+  margin-top: 30px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.snap-button {
+  position: absolute;
+  bottom: -20px;
+  box-shadow: 1px 1px 3px black;
+  right: 50%;
+  transform: translateX(50%);
+  border-radius: 50%;
+  padding: 10px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.refresh {
+  position: absolute;
+  box-shadow: 1px 1px 3px black;
+  border-radius: 50%;
+  padding: 10px;
+  border: none;
+  display: flex;
+  right: 25px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.compare-button {
+  border:none;
+  border-radius: 5px;
+  padding: 5px 20px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.success  {
+  color: black;
+  background-color: white;
+  width: 300px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.overlay {
+  top:0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.3);
+  height: 100%;
+}
