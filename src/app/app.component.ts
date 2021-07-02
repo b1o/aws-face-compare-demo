@@ -19,6 +19,7 @@ export class AppComponent {
   public loading = false;
   public result: any = null;
   public showOverlay = false;
+  public match = false;
 
   constructor() {
     const region = 'us-east-1'; // Region
@@ -74,14 +75,19 @@ export class AppComponent {
 
     this.loading = true;
     this.awsClient.compareFaces(params, (err: any, response: any) => {
+      this.showOverlay = true;
+
       if (err) {
         console.log(err);
+        this.match = false;
         return;
       } else {
         console.log(response);
         this.result = response;
         if (response.FaceMatches[0].Similarity > 70) {
-          this.showOverlay = true;
+          this.match = true;
+        } else {
+          this.match = false;
         }
       }
       this.loading = false;

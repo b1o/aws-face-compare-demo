@@ -64,8 +64,7 @@
   </div>
 </div>
 
-<div *ngIf="result">Similarity: {{ result.FaceMatches[0].Similarity }}</div>
-
 <div class="overlay" *ngIf="showOverlay" (click)="showOverlay = false">
-  <div class="success">Изображенията съвпадат</div>
+  <div *ngIf="match" class="success">Изображенията съвпадат</div>
+  <div *ngIf="!match" class="success">Изображенията не съвпадат</div>
 </div>
