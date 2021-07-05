@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
 import { Subject } from 'rxjs';
@@ -21,7 +22,7 @@ export class AppComponent {
   public showOverlay = false;
   public match = false;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     const region = 'us-east-1'; // Region
     const credentials = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: 'us-east-1:4a72191e-413c-49e8-8c10-7f9b9fc6ee35',
@@ -64,24 +65,26 @@ export class AppComponent {
   }
 
   async compareFaces() {
-    const params = {
-      SourceImage: {
-        Bytes: this.getBinary(this.images[0].imageAsBase64),
-      },
-      TargetImage: {
-        Bytes: this.getBinary(this.images[1].imageAsBase64),
-      },
-    };
+    const params = [
+      new Blob([this.getBinary(this.images[0].imageAsBase64)], {
+        type: 'image/png',
+      }),
+      new Blob([this.getBinary(this.images[1].imageAsBase64)], {
+        type: 'image/png',
+      }),
+    ];
+
+    const formData = new FormData();
+    formData.append('images[]', params[0]);
+    formData.append('images[]', params[1]);
+
+    console.log(params);
 
     this.loading = true;
-    this.awsClient.compareFaces(params, (err: any, response: any) => {
-      this.showOverlay = true;
+    this.http.post('/compare', formData).subscribe(
+      (response: any) => {
+        this.showOverlay = true;
 
-      if (err) {
-        console.log(err);
-        this.match = false;
-        return;
-      } else {
         console.log(response);
         this.result = response;
         if (response.FaceMatches[0].Similarity > 70) {
@@ -89,8 +92,15 @@ export class AppComponent {
         } else {
           this.match = false;
         }
-      }
-      this.loading = false;
-    });
+        this.loading = false;
+      },
+      (err) => {
+        console.log(err);
+        this.showOverlay = true
+        this.loading = false;
+        this.match = false;
+        return;
+      },
+    );
   }
 }

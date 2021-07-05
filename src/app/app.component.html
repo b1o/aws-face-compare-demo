@@ -3,11 +3,11 @@
     <webcam
       [width]="720"
       [height]="480"
-      [allowCameraSwitch]="false"
+      [allowCameraSwitch]="true"
       [trigger]="triggerObservable"
       (imageCapture)="onFileChange($event)"
     ></webcam>
-    <!-- <div
+    <div
       *ngIf="loading"
       class="loading"
       style="
@@ -24,7 +24,7 @@
       "
     >
       Comparing...
-    </div> -->
+    </div>
 
     <button *ngIf="images.length < 2" class="snap-button" (click)="capture()">
       <span class="material-icons"> photo_camera </span>
@@ -66,5 +66,5 @@
 
 <div class="overlay" *ngIf="showOverlay" (click)="showOverlay = false">
   <div *ngIf="match" class="success">Изображенията съвпадат</div>
-  <div *ngIf="!match" class="success">Изображенията не съвпадат</div>
+  <div *ngIf="!match" class="success">Изображенията не съвпадат или няма намерени лица</div>
 </div>
