@@ -1,6 +1,13 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: #ccc;
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.w-100 {
+  width: 100%;
+}

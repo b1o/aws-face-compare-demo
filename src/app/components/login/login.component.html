@@ -1,0 +1,63 @@
+<div class="wrapper">
+  <mat-card class="login-form" style="position: relative">
+    <div *ngIf="loading" class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <mat-card-header>
+      <h1 mat-card-title>Login</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-stepper linear #stepper orientation="vertical">
+        <mat-step [completed]="passwordValidated">
+          <ng-template matStepLabel>Enter your credentials</ng-template>
+          <ng-template matStepContent>
+            <div style="position: relative">
+              <form [formGroup]="loginForm">
+                <mat-form-field class="w-100">
+                  <mat-label>Email</mat-label>
+                  <input
+                    formControlName="email"
+                    autocomplete="off"
+                    type="text"
+                    type="email"
+                    matInput
+                  />
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                  <mat-label>Password</mat-label>
+                  <input
+                    formControlName="password"
+                    autocomplete="off"
+                    type="text"
+                    type="password"
+                    matInput
+                  />
+                </mat-form-field>
+              </form>
+              <button
+                mat-button
+                [disabled]="loading"
+                (click)="emailPasswordCheck()"
+              >
+                Next
+              </button>
+            </div>
+          </ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Face check</ng-template>
+          <ng-template matStepContent>
+            <webcam
+              [trigger]="triggerObservable"
+              (imageCapture)="onImage($event)"
+              [width]="480"
+            ></webcam>
+            <button mat-button [disabled]="loading" (click)="faceCheck()">
+              Next
+            </button>
+          </ng-template>
+        </mat-step>
+      </mat-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>

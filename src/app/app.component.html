@@ -1,4 +1,4 @@
-<div class="wrapper">
+<!-- <div class="wrapper">
   <div style="position: relative">
     <webcam
       [width]="720"
@@ -67,4 +67,6 @@
 <div class="overlay" *ngIf="showOverlay" (click)="showOverlay = false">
   <div *ngIf="match" class="success">Изображенията съвпадат</div>
   <div *ngIf="!match" class="success">Изображенията не съвпадат или няма намерени лица</div>
-</div>
+</div> -->
+
+<router-outlet></router-outlet>

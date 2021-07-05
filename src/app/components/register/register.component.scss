@@ -1,0 +1,29 @@
+.photo {
+  width: calc(100% - 6px);
+  min-height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: dashed;
+  border-width: 3px;
+  cursor: pointer;
+}
+
+.image-preview {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.mat-form-field:nth-child(2) ::ng-deep.mat-form-field-flex {
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+.mat-form-field:first-child ::ng-deep.mat-form-field-flex {
+  border-top-right-radius: 0 !important;
+}
+
+.mat-form-field:last-child ::ng-deep.mat-form-field-flex {
+  border-top-left-radius: 0 !important;
+}

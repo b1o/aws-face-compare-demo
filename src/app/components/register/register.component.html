@@ -1,0 +1,71 @@
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  "
+>
+  <form [formGroup]="registerForm">
+    <mat-card>
+      <mat-card-header>
+        <h1 mat-card-title>Register</h1>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div style="display: flex;">
+          <mat-form-field style="flex:1" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              formControlName="email"
+              matInput
+              placeholder="Email"
+              type="email"
+            />
+          </mat-form-field>
+          <mat-form-field
+          style="flex:1"
+            appearance="fill"
+          >
+            <mat-label>Username</mat-label>
+            <input formControlName="username" matInput placeholder="Username" />
+          </mat-form-field>
+          <mat-form-field style="flex:1" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+              formControlName="password"
+              matInput
+              placeholder="Password"
+              type="password"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <div (click)="takePhoto()" matRipple class="photo">
+            <mat-icon
+              *ngIf="!image?.value"
+              style="font-size: 48px; width: 48px; height: 48px"
+              >add</mat-icon
+            >
+            <img
+              class="image-preview"
+              src="{{ image?.value.imageAsDataUrl }}"
+              *ngIf="image?.value"
+            />
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button
+          (click)="submit()"
+          style="width: 100%"
+          mat-raised-button
+          color="primary"
+        >
+          Submit
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

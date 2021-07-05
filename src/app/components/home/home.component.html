@@ -1,0 +1,37 @@
+<div
+  style="
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <mat-card style="width: 400px" class="actions" color="primary">
+    <mat-card-header>
+      <mat-card-title style="text-align: center; width: 100%"
+        >Demo
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <div *ngIf="!user" style="display: flex; flex-direction: column">
+          <button
+            routerLink="login"
+            mat-raised-button
+            color="accent"
+            style="margin-bottom: 10px"
+          >
+            Login
+          </button>
+          <button routerLink="register" mat-raised-button color="primary">
+            Register
+          </button>
+        </div>
+        <div *ngIf="user">
+          <h1>Welcome, {{ user?.username }}</h1>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

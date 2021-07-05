@@ -1,0 +1,18 @@
+<div
+  style="width:480"
+  id="cameraContainer"
+  (window:resize)="onResize()"
+  mat-dialog-content
+>
+  <webcam
+    [width]="width"
+    [height]="height"
+    [trigger]="triggerObservable"
+    (imageCapture)="onImage($event)"
+  ></webcam>
+</div>
+
+<div [align]="'end'" mat-dialog-actions>
+  <button mat-button [mat-dialog-close] color="accent">cancel</button>
+  <button (click)="snap()" mat-raised-button color="primary">Take photo</button>
+</div>
