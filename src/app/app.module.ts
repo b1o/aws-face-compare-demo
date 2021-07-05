@@ -37,7 +37,7 @@ const routes: Route[] = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {useHash: true}),
   ],
   providers: [],
   bootstrap: [AppComponent],
