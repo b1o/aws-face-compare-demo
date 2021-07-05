@@ -6,6 +6,7 @@ const fs = require("fs");
 const cors = require("cors");
 const ProfileService = require("./profiles.js");
 const { secretAccessKey, accessKeyId } = require("./credentials.json");
+console.log(secretAccessKey,  accessKeyId)
 const {
   RekognitionClient,
   CompareFacesCommand,
