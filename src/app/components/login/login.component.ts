@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
           this.backend.currentUser.next(data.result);
           this.router.navigateByUrl('/');
           this.snackBar.open(
-            `Face recognition was successful with confidence of: ${data.similarity}`,
+            `Face recognition was successful with confidence of: ${Math.round(data.similarity)}%`,
             'OK'
           );
         } else {
