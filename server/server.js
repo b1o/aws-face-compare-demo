@@ -78,15 +78,15 @@ app.post("/face-check", upload.any(), (req, res) => {
   const filename = req.files[0].filename;
   const profile = ProfileService.getProfile(req.body.email);
 
-  const TargetImage = fs.readFileSync(`./uploads/${profile.photo}`);
-  const SourceImage = fs.readFileSync(`./uploads/${filename}`);
+  const source = fs.readFileSync(`./uploads/${profile.photo}`);
+  const target = fs.readFileSync(`./uploads/${filename}`);
 
   const command = new CompareFacesCommand({
     SourceImage: {
-      Bytes: SourceImage,
+      Bytes: source,
     },
     TargetImage: {
-      Bytes: TargetImage,
+      Bytes: target,
     },
     SimilarityThreshold: 90,
   });
@@ -97,7 +97,12 @@ app.post("/face-check", upload.any(), (req, res) => {
       console.log(awsRes);
       fs.unlinkSync(`./uploads/${filename}`);
       if (awsRes.FaceMatches[0].Similarity > 90) {
-        res.json({ success: true, result: profile, similarity: awsRes.FaceMatches[0].Similarity });
+        res.json({
+          success: true,
+          result: profile,
+          similarity: awsRes.FaceMatches[0].Similarity,
+          faceData: awsRes,
+        });
       } else {
         res.json({ error: true, message: "Face check fail." });
       }
