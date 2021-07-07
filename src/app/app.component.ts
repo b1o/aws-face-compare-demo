@@ -3,7 +3,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
 import { Subject } from 'rxjs';
 
-declare var AWS: any;
 
 @Component({
   selector: 'app-root',
@@ -15,7 +14,6 @@ export class AppComponent {
 
   public trigger: Subject<void> = new Subject<void>();
 
-  private awsClient: any = null;
   public images: WebcamImage[] = [];
   public loading = false;
   public result: any = null;
@@ -23,19 +21,6 @@ export class AppComponent {
   public match = false;
 
   constructor(private http: HttpClient) {
-    const region = 'us-east-1'; // Region
-    const credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: 'us-east-1:4a72191e-413c-49e8-8c10-7f9b9fc6ee35',
-    });
-
-    const config = new AWS.Config({
-      credentials,
-      region,
-    });
-
-    AWS.config = config;
-
-    this.awsClient = new AWS.Rekognition(config);
   }
 
   onFileChange(event: WebcamImage) {

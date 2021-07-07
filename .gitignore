@@ -8,7 +8,7 @@
 /server/uploads
 
 /server/credentials.json
-/server/uploads
+/server/uploads/
 
 # dependencies
 /node_modules

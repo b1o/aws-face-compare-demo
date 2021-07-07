@@ -7,31 +7,16 @@ const {
   RekognitionClient,
   CompareFacesCommand,
 } = require("@aws-sdk/client-rekognition");
-
-const accessKey = "AKIAWKVGW3MWJEJXTLJW";
-const secret = "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";
+const { secretAccessKey, accessKeyId } = require("./credentials.json");
 
 const app = express();
 const port = 3000;
 const rekognitionClient = new RekognitionClient({
   region: "us-east-1",
-  credentials: { secretAccessKey: secret, accessKeyId: accessKey },
+  credentials: { secretAccessKey, accessKeyId },
 });
 
 const angular_built_app = path.join(__dirname, "..", "dist", "photos-app");
-
-function getBinary(base64Image) {
-  var binaryImg = atob(base64Image);
-  var length = binaryImg.length;
-  var ab = new ArrayBuffer(length);
-  var ua = new Uint8Array(ab);
-  for (var i = 0; i < length; i++) {
-    ab[i] = base64Image.charCodeAt(i);
-  }
-
-  return ab;
-}
-
 app.use(express.static(angular_built_app));
 app.use(express.json());
 
