@@ -3,7 +3,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
 import { Subject } from 'rxjs';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,8 +20,7 @@ export class AppComponent {
   public match = false;
   public similarity = 0;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   onFileChange(event: WebcamImage) {
     if (this.images.length == 2) return;
@@ -50,6 +48,15 @@ export class AppComponent {
     return ab;
   }
 
+  public reset() {
+    this.loading = false;
+    this.match = false;
+    this.showOverlay = false;
+    this.similarity = 0;
+    this.images = [];
+    this.result = null;
+  }
+
   async compareFaces() {
     const params = [
       new Blob([this.getBinary(this.images[0].imageAsBase64)], {
@@ -64,14 +71,13 @@ export class AppComponent {
     formData.append('images[]', params[0]);
     formData.append('images[]', params[1]);
 
-    console.log(params);
-
     this.loading = true;
     this.http.post('/compare', formData).subscribe(
       (response: any) => {
         this.showOverlay = true;
         console.log(response);
         this.result = response;
+
         if (response.FaceMatches[0]) {
           this.similarity = response.FaceMatches[0].Similarity;
           this.match = true;
@@ -82,11 +88,11 @@ export class AppComponent {
       },
       (err) => {
         console.log(err);
-        this.showOverlay = true
+        this.showOverlay = true;
         this.loading = false;
         this.match = false;
         return;
-      },
+      }
     );
   }
 }

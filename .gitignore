@@ -8,11 +8,11 @@
 /server/uploads
 
 /server/credentials.json
-/server/uploads/
+/server/uploads/*
 
 # dependencies
 /node_modules
-
+/uploads
 # profiling files
 chrome-profiler-events*.json
 

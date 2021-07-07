@@ -57,7 +57,7 @@
     <button
       class="refresh"
       *ngIf="images.length"
-      (click)="images = []; result = null"
+      (click)="reset()"
     >
       <span class="material-icons"> refresh </span>
     </button>
