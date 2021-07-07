@@ -97,7 +97,7 @@ app.post("/face-check", upload.any(), (req, res) => {
       console.log(awsRes);
       fs.unlinkSync(`./uploads/${filename}`);
       if (awsRes.FaceMatches[0].Similarity > 90) {
-        res.json({ success: true, result: profile });
+        res.json({ success: true, result: profile, similarity: awsRes.FaceMatches[0].Similarity });
       } else {
         res.json({ error: true, message: "Face check fail." });
       }

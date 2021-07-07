@@ -59,8 +59,12 @@ export class LoginComponent implements OnInit {
         if (data.success) {
           this.backend.currentUser.next(data.result);
           this.router.navigateByUrl('/');
+          this.snackBar.open(
+            `Face recognition was successful with confidence of: ${data.similarity}`,
+            'OK'
+          );
         } else {
-          this.snackBar.open(data.message, 'OK')
+          this.snackBar.open(data.message, 'OK');
           this.router.navigateByUrl('/');
         }
       });
