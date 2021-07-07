@@ -19,6 +19,7 @@ export class AppComponent {
   public result: any = null;
   public showOverlay = false;
   public match = false;
+  public similarity = 0;
 
   constructor(private http: HttpClient) {
   }
@@ -69,10 +70,10 @@ export class AppComponent {
     this.http.post('/compare', formData).subscribe(
       (response: any) => {
         this.showOverlay = true;
-
         console.log(response);
         this.result = response;
-        if (response.FaceMatches[0].Similarity > 70) {
+        if (response.FaceMatches[0]) {
+          this.similarity = response.FaceMatches[0].Similarity;
           this.match = true;
         } else {
           this.match = false;

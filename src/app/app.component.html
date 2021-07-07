@@ -65,6 +65,10 @@
 </div>
 
 <div class="overlay" *ngIf="showOverlay" (click)="showOverlay = false">
-  <div *ngIf="match" class="success">Изображенията съвпадат</div>
-  <div *ngIf="!match" class="success">Изображенията не съвпадат или няма намерени лица</div>
+  <div *ngIf="match" class="success">
+    Изображенията съвпадат. Прилика - {{ similarity }}
+  </div>
+  <div *ngIf="!match" class="success">
+    Изображенията не съвпадат или няма намерени лица. Прилика - {{ similarity }}
+  </div>
 </div>

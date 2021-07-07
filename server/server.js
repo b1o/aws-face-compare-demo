@@ -35,7 +35,7 @@ app.post("/compare", upload.any(), (req, res) => {
     TargetImage: {
       Bytes: fs.readFileSync('./uploads/' + body[1].filename),
     },
-    SimilarityThreshold: 70,
+    SimilarityThreshold: 95,
   });
   rekognitionClient
     .send(command)
