@@ -43,9 +43,7 @@ app.use(cors());
 
 const upload = multer({ dest: "uploads/" });
 
-app.get("/", (req, res) => {
-  res.sendFile("index.html");
-});
+
 
 app.post("/login", (req, res) => {
   const { password, email } = req.body;

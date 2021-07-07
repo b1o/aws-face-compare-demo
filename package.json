@@ -7,7 +7,7 @@
     "build": "ng build --configuration production --progress",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start:server": "npm run build & node ./server/server.js"
+    "start:server": "npm run build & pm2 start ./server/server.js"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~12.0.3",
     "@angular/platform-browser-dynamic": "~12.0.3",
     "@angular/router": "~12.0.3",
+    "@aws-sdk/client-rekognition": "^3.20.0",
     "atob": "^2.1.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
