@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { WebcamImage } from 'ngx-webcam';
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit {
     private backend: BackendService,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
       email: '',
@@ -56,6 +58,9 @@ export class LoginComponent implements OnInit {
         console.log(data);
         if (data.success) {
           this.backend.currentUser.next(data.result);
+          this.router.navigateByUrl('/');
+        } else {
+          this.snackBar.open(data.message, 'OK')
           this.router.navigateByUrl('/');
         }
       });

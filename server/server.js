@@ -6,7 +6,7 @@ const fs = require("fs");
 const cors = require("cors");
 const ProfileService = require("./profiles.js");
 const { secretAccessKey, accessKeyId } = require("./credentials.json");
-console.log(secretAccessKey,  accessKeyId)
+console.log(secretAccessKey, accessKeyId);
 const {
   RekognitionClient,
   CompareFacesCommand,
@@ -42,8 +42,6 @@ app.use(express.json());
 app.use(cors());
 
 const upload = multer({ dest: "uploads/" });
-
-
 
 app.post("/login", (req, res) => {
   const { password, email } = req.body;
@@ -101,7 +99,7 @@ app.post("/face-check", upload.any(), (req, res) => {
       if (awsRes.FaceMatches[0].Similarity > 90) {
         res.json({ success: true, result: profile });
       } else {
-        res.json({ success: false, result: { error: "Face check fail." } });
+        res.json({ error: true, message: "Face check fail." });
       }
     })
     .catch((err) => res.status(403).json(err));

@@ -9,9 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const MODULES = [
   MatCardModule,
+  MatSnackBarModule,
   MatProgressSpinnerModule,
   MatRippleModule,
   MatButtonModule,
